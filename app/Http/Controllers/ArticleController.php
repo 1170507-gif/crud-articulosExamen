@@ -11,6 +11,11 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::with('category')->get();
+        
+        if (request()->wantsJson()) {
+            return response()->json($articles);
+        }
+        
         return view('articles.index', compact('articles'));
     }
 
